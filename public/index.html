@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dictionary api</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .dictionaryapi-container {
+        box-shadow: 0px 0px 14px 6px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        margin: 1rem auto;
+        width: fit-content;
+      }
+      .headline {
+        color: crimson;
+        font-weight: normal;
+        text-transform: capitalize;
+        text-align: center;
+      }
+      .api-query-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 12px 0;
+      }
+      .apidata-box {
+        width: 50vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+      #inputqueryfield {
+        background: transparent;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid crimson;
+        padding: 9px 10px;
+      }
+      #querybtn {
+        background: crimson;
+        padding: 5px 8px;
+        border-radius: 5px;
+        color: white;
+        text-transform: capitalize;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dictionaryapi-container">
+      <h3 class="headline">welcome to the expressjs dictionary</h3>
+      <div class="api-query-container">
+        <form action="#" method="post">
+          <input
+            type="text"
+            name="query"
+            id="inputqueryfield"
+            placeholder="search for your query here"
+          />
+          <button id="querybtn">submit</button>
+        </form>
+        <div class="apidata-box"></div>
+      </div>
+    </div>
+    <script>
+      const querybtn = document.getElementById("querybtn");
+      const apidatabox = document.querySelector(".apidata-box");
+      const inputqueryfield = document.getElementById("inputqueryfield");
+      querybtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        let apipageurl = `http://localhost:3000/searchword?word=${inputqueryfield.value}`;
+        let getapi = fetch(apipageurl);
+        getapi
+          .then((response) => {
+            return response.json();
+          })
+          .then((apidata) => {
+            if (apidata.word && apidata.definition) {
+              let resultstr = `${apidata.word} <br>
+              meanings
+              <p>${apidata.definition}</p>`;
+              apidatabox.innerHTML = resultstr;
+            } else {
+              apidatabox.innerHTML = "no knowledge about this word";
+            }
+            // console.log(apidata);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    </script>
+  </body>
+</html>
