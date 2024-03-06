@@ -15,13 +15,14 @@ This is a simple dictionary web application built using Express.js, RapidAPI, an
 - RapidAPI
 - HTML
 - CSS
+- JAVASCRIPT
 
 ## Installation
 
 1. Clone the repository:
 2. Install dependencies:
 3. Set up RapidAPI account and get API key.
-4. Replace `<YOUR_RAPIDAPI_KEY>` with your actual RapidAPI key in `app.js`.
+4. Replace `<YOUR_RAPIDAPI_KEY>` with your actual RapidAPI key in `server.js`.
 
 ## Usage
 
