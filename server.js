@@ -4,7 +4,10 @@ const axios = require("axios").default;
 const { chownSync } = require("fs");
 const path = require("path");
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
+
+// const port = process.env.port || 3000;
+// if the above port worked then fine otherwise run this command to change the port PORT=3001 nodemon server.js
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
@@ -19,8 +22,8 @@ app.get("/searchword", (req, res) => {
     url: "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary",
     params: { word: apiword },
     headers: {
-      "X-RapidAPI-Key": "your api key",
-      "X-RapidAPI-Host": "your api host",
+      "X-RapidAPI-Key": "9899c63796mshaa966f42b9b993fp1f5720jsn5ecf87f99a36",
+      "X-RapidAPI-Host": "dictionary-by-api-ninjas.p.rapidapi.com",
     },
   };
 
